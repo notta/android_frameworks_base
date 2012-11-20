@@ -25,6 +25,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -902,6 +903,13 @@ class ServerThread {
             } catch (Throwable e) {
                 Slog.e(TAG, "Failure starting EdgeGesture service", e);
             }
+
+            try {
+                Slog.i(TAG, "AssetRedirectionManager Service");
+                ServiceManager.addService("assetredirection", new AssetRedirectionManagerService(context));
+            } catch (Throwable e) {
+                Slog.e(TAG, "Failure starting AssetRedirectionManager Service", e);
+            }
         }
 
         // Before things start rolling, be sure we have decided whether
@@ -994,6 +1002,15 @@ class ServerThread {
                 reportWtf("making Gesture Sensor Service ready", e);
             }
         }
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_APP_LAUNCH_FAILURE);
+        filter.addAction(Intent.ACTION_APP_LAUNCH_FAILURE_RESET);
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addCategory(Intent.CATEGORY_THEME_PACKAGE_INSTALLED_STATE_CHANGE);
+        filter.addDataScheme("package");
+        context.registerReceiver(new AppsLaunchFailureReceiver(), filter);
 
         if (edgeGestureService != null) {
             try {
