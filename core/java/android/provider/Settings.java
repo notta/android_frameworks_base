@@ -2746,6 +2746,36 @@ public final class Settings {
         public static final String QUIET_HOURS_END = "quiet_hours_end";
 
         /**
+         * Whether to remove the sound from phone ringing during quiet hours.
+         * @hide
+         */
+        public static final String QUIET_HOURS_RINGER = "quiet_hours_ringer";
+
+        /**
+         * Constant: Keep ringer on for all numbers during quiet hours
+         * @hide
+         */
+        public static final int QUIET_HOURS_RINGER_ALLOW_ALL = 0;
+
+        /**
+         * Constant: Only ring for numbers in contact list during quiet hours
+         * @hide
+         */
+        public static final int QUIET_HOURS_RINGER_CONTACTS_ONLY = 1;
+
+        /**
+         * Constant: Only ring for favorite contacts during quiet hours
+         * @hide
+         */
+        public static final int QUIET_HOURS_RINGER_FAVORITES_ONLY = 2;
+
+        /**
+         * Constant: Disable ringer during quiet hours
+         * @hide
+         */
+        public static final int QUIET_HOURS_RINGER_DISABLED = 3;
+
+        /**
          * Whether to remove the sound from outgoing notifications during quiet hours.
          * @hide
          */
@@ -2756,18 +2786,6 @@ public final class Settings {
          * @hide
          */
         public static final String QUIET_HOURS_HAPTIC = "quiet_hours_haptic";
-
-        /**
-         * Whether to remove the vibration from outgoing notifications during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_STILL = "quiet_hours_still";
-
-        /**
-         * Whether to attempt to dim the LED color during quiet hours.
-         * @hide
-         */
-        public static final String QUIET_HOURS_DIM = "quiet_hours_dim";
 
         /**
          * Whether to remove the system sounds during quiet hours.
@@ -3188,7 +3206,9 @@ public final class Settings {
             QUIET_HOURS_ENABLED,
             QUIET_HOURS_START,
             QUIET_HOURS_END,
+            QUIET_HOURS_RINGER,
             QUIET_HOURS_MUTE,
+            QUIET_HOURS_HAPTIC,
             QUIET_HOURS_SYSTEM,
             QUIET_HOURS_STILL,
             QUIET_HOURS_DIM
