@@ -289,17 +289,8 @@ public class ResourcesManager {
                 boolean isDefaultDisplay = (displayId == Display.DEFAULT_DISPLAY);
                 DisplayMetrics dm = defaultDisplayMetrics;
                 final boolean hasOverrideConfiguration = key.hasOverrideConfiguration();
-                boolean themeChanged = (changes & ActivityInfo.CONFIG_THEME_RESOURCE) != 0;
-                if (themeChanged) {
-                    AssetManager am = r.getAssets();
-                    if (am.hasThemeSupport()) {
-                        detachThemeAssets(am);
-                        if (!TextUtils.isEmpty(config.customTheme.getThemePackageName())) {
-                            attachThemeAssets(am, config.customTheme);
-                        }
-                    }
-                }
-                if (!isDefaultDisplay || hasOverrideConfiguration) {
+                final boolean themeChanged = (changes & ActivityInfo.CONFIG_UI_THEME_MODE) != 0;
+                if ((!isDefaultDisplay || hasOverrideConfiguration)) {
                     if (tmpConfig == null) {
                         tmpConfig = new Configuration();
                     }

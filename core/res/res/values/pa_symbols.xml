@@ -36,6 +36,9 @@
   <!--Notification led-->
   <java-symbol type="array" name="notification_light_package_mapping" />
 
+  <!--Camera flash-->
+  <java-symbol type="bool" name="config_device_has_camera_flash" />
+
   <!--Setting confirmation dialog-->
   <java-symbol type="id" name="setting_confirmation_dialog_visual_hint" />
   <java-symbol type="layout" name="setting_confirmation_dialog" />
@@ -43,8 +46,9 @@
   <java-symbol type="string" name="setting_confirmation_yes" />
   <java-symbol type="string" name="setting_confirmation_no" />
 
-  <!--Camera flash-->
-  <java-symbol type="bool" name="config_device_has_camera_flash" />
+  <!-- UI theme mode -->
+  <java-symbol type="integer" name="config_uiThemeMode" />
+  <java-symbol type="string" name="theme_auto_switch_mode_error" />
 
   <!-- Safe headset volume warning dialog -->
   <java-symbol type="string" name="safe_headset_warning_title" />
