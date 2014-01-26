@@ -3052,6 +3052,56 @@ public final class Settings {
         public static final String AOSP_DIALER = "aosp_dialer";
 
         /**
+         * Show or hide clock
+         * 0 - hide
+         * 1 - show (default)
+         * @hide
+         */
+        public static final String STATUS_BAR_CLOCK = "status_bar_clock";
+
+        /**
+         * AM/PM Style for clock options
+         * 0 - Normal AM/PM
+         * 1 - Small AM/PM
+         * 2 - No AM/PM
+         * @hide
+         */
+        public static final String STATUSBAR_CLOCK_AM_PM_STYLE = "statusbar_clock_am_pm_style";
+
+        /**
+         * Style of clock
+         * 0 - Hide Clock
+         * 1 - Right Clock
+         * 2 - Center Clock
+         * @hide
+         */
+        public static final String STATUSBAR_CLOCK_STYLE = "statusbar_clock_style";
+
+        /**
+        * @hide
+        * Shows custom date before clock time
+        * 0 - No Date
+        * 1 - Small Date
+        * 2 - Normal Date
+        */
+        public static final String STATUSBAR_CLOCK_DATE_DISPLAY = "statusbar_clock_date_display";
+
+        /**
+        * @hide
+        * Sets the date string style
+        * 0 - Regular style
+        * 1 - Lowercase
+        * 2 - Uppercase
+        */
+        public static final String STATUSBAR_CLOCK_DATE_STYLE = "statusbar_clock_date_style";
+
+        /**
+        * @hide
+        * Stores the java DateFormat string for the date
+        */
+        public static final String STATUSBAR_CLOCK_DATE_FORMAT = "statusbar_clock_date_format";
+
+        /**
          * Width and height of output video expressed in WxH
          * @hide
          */
@@ -3118,6 +3168,13 @@ public final class Settings {
          * @hide
          */
         public static final String PEEK_STATE = "peek_state";
+
+        /*
+         * Holds the text for the Carrier label. An empty string
+         * will bring the default text back.
+         * @hide
+         */
+        public static final String NOTIFICATION_CUSTOM_CARRIER_LABEL = "notification_custom_carrier_label";
 
         /**
          * Whether to show alternative recent clear all button on recent panel top right corner:
