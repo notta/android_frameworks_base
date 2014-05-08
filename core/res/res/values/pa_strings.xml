@@ -55,6 +55,9 @@
     <string name="setting_confirmation_yes">Yes</string>
     <string name="setting_confirmation_no">No</string>
 
+    <!-- Error description on theme switch with ligtsensor mode enabled -->
+    <string name="theme_auto_switch_mode_error">Automatic light condition change mode is enabled. Manual switching is not possible.</string>
+
     <!-- Immersive mode confirmation: Pick confirmation window from bottom when status bar is visible -->
     <string name="immersive_mode_confirmation_bottom">Swipe up from the bottom to exit full screen.</string>
 
