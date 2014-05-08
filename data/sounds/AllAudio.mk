@@ -29,6 +29,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/notifications/Elara.ogg:system/media/audio/notifications/Elara.ogg \
 	$(LOCAL_PATH)/notifications/Europa.ogg:system/media/audio/notifications/Europa.ogg \
 	$(LOCAL_PATH)/notifications/Iapetus.ogg:system/media/audio/notifications/Iapetus.ogg \
+	$(LOCAL_PATH)/notifications/OldSpice.ogg:system/media/audio/notifications/OldSpice.ogg \
 	$(LOCAL_PATH)/notifications/Io.ogg:system/media/audio/notifications/Io.ogg \
 	$(LOCAL_PATH)/notifications/Rhea.ogg:system/media/audio/notifications/Rhea.ogg \
 	$(LOCAL_PATH)/notifications/Salacia.ogg:system/media/audio/notifications/Salacia.ogg \
