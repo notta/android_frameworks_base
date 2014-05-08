@@ -185,7 +185,10 @@ public class AppOpsManager {
     /** @hide Continually monitoring location data with a relatively high power request. */
     public static final int OP_MONITOR_HIGH_POWER_LOCATION = 42;
     /** @hide */
-    public static final int _NUM_OP = 43;
+    /** @hide */
+    public static final int OP_BOOT_COMPLETED = 43;
+    /** @hide */
+    public static final int _NUM_OP = 44;
 
     /** Access to coarse location information. */
     public static final String OPSTR_COARSE_LOCATION =
@@ -252,6 +255,7 @@ public class AppOpsManager {
             OP_WAKE_LOCK,
             OP_COARSE_LOCATION,
             OP_COARSE_LOCATION,
+            OP_BOOT_COMPLETED,
     };
 
     /**
@@ -302,6 +306,7 @@ public class AppOpsManager {
             null,
             OPSTR_MONITOR_LOCATION,
             OPSTR_MONITOR_HIGH_POWER_LOCATION,
+            null,
     };
 
     /**
@@ -352,6 +357,7 @@ public class AppOpsManager {
             "WAKE_LOCK",
             "MONITOR_LOCATION",
             "MONITOR_HIGH_POWER_LOCATION",
+            "BOOT_COMPLETED",
     };
 
     /**
@@ -402,6 +408,7 @@ public class AppOpsManager {
             android.Manifest.permission.WAKE_LOCK,
             null, // no permission for generic location monitoring
             null, // no permission for high power location monitoring
+            android.Manifest.permission.RECEIVE_BOOT_COMPLETED,
     };
 
     /**
@@ -451,6 +458,7 @@ public class AppOpsManager {
             AppOpsManager.MODE_ALLOWED,
             AppOpsManager.MODE_ALLOWED,
             AppOpsManager.MODE_ALLOWED,
+            AppOpsManager.MODE_ALLOWED, // OP_BOOT_COMPLETED
     };
 
     /**
@@ -477,6 +485,7 @@ public class AppOpsManager {
             false,
             false,
             true,      // OP_WRITE_SMS
+            false,
             false,
             false,
             false,
@@ -668,13 +677,18 @@ public class AppOpsManager {
         private final long mTime;
         private final long mRejectTime;
         private final int mDuration;
+        private final int mAllowedCount;
+        private final int mIgnoredCount;
 
-        public OpEntry(int op, int mode, long time, long rejectTime, int duration) {
+        public OpEntry(int op, int mode, long time, long rejectTime, int duration,
+                int allowedCount, int ignoredCount) {
             mOp = op;
             mMode = mode;
             mTime = time;
             mRejectTime = rejectTime;
             mDuration = duration;
+            mAllowedCount = allowedCount;
+            mIgnoredCount = ignoredCount;
         }
 
         public int getOp() {
@@ -701,6 +715,14 @@ public class AppOpsManager {
             return mDuration == -1 ? (int)(System.currentTimeMillis()-mTime) : mDuration;
         }
 
+        public int getAllowedCount() {
+            return mAllowedCount;
+        }
+
+        public int getIgnoredCount() {
+            return mIgnoredCount;
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -713,6 +735,8 @@ public class AppOpsManager {
             dest.writeLong(mTime);
             dest.writeLong(mRejectTime);
             dest.writeInt(mDuration);
+            dest.writeInt(mAllowedCount);
+            dest.writeInt(mIgnoredCount);
         }
 
         OpEntry(Parcel source) {
@@ -721,6 +745,8 @@ public class AppOpsManager {
             mTime = source.readLong();
             mRejectTime = source.readLong();
             mDuration = source.readInt();
+            mAllowedCount = source.readInt();
+            mIgnoredCount = source.readInt();
         }
 
         public static final Creator<OpEntry> CREATOR = new Creator<OpEntry>() {
@@ -1146,5 +1172,13 @@ public class AppOpsManager {
     /** @hide */
     public void finishOp(int op) {
         finishOp(op, Process.myUid(), mContext.getOpPackageName());
+    }
+
+    /** @hide */
+    public void resetCounters() {
+        try {
+            mService.resetCounters();
+        } catch (RemoteException e) {
+        }
     }
 }
